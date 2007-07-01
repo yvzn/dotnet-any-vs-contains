@@ -1,4 +1,4 @@
-﻿using System;
+﻿using BenchmarkDotNet.Running;
 
 namespace AnyVsContainsBenchmark
 {
@@ -6,7 +6,7 @@ namespace AnyVsContainsBenchmark
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BenchmarkRunner.Run<Benchmarks>();
         }
     }
 }

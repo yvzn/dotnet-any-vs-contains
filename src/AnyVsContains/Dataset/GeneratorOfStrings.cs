@@ -1,6 +1,6 @@
 ﻿namespace AnyVsContains.Dataset
 {
-    internal class GeneratorOfStrings : Generator<string>
+    public class GeneratorOfStrings : Generator<string>
     {
         public override string GetSearchPositive()
         {

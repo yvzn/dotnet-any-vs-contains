@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AnyVsContains.Dataset
 {
-    abstract internal class Generator<T> : IGenerator<T>, IGenerator
+    abstract public class Generator<T> : IGenerator<T>, IGenerator
     {
         // random with constant seed, for reproductibility
         protected readonly Random random = new(Seed: 20210620);

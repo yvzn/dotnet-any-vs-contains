@@ -1,6 +1,6 @@
 ﻿namespace AnyVsContains.Dataset
 {
-    internal class GeneratorOfRecords : Generator<Contract>
+    public class GeneratorOfRecords : Generator<Contract>
     {
         public override Contract GetSearchPositive()
         {
@@ -13,5 +13,5 @@
         }
     }
 
-    internal record Contract(string Reference, string PropertyA, string PropertyB, int PropertyC);
+    public record Contract(string Reference, string PropertyA, string PropertyB, int PropertyC);
 }
