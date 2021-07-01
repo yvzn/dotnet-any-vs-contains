@@ -5,31 +5,33 @@ using System.Linq;
 
 namespace AnyVsContains.Dataset
 {
-    abstract internal class Generator<T> : IGenerator
+    abstract internal class Generator<T> : IGenerator<T>, IGenerator
     {
         // random with constant seed, for reproductibility
         protected readonly Random random = new(Seed: 20210620);
 
-        public IEnumerable GetDataset(int count)
+        public IEnumerable<T> GetDataset(int count)
         {
             return GetItems(count).OrderBy(_ => random.Next());
         }
+
+        IEnumerable IGenerator.GetDataset(int count) => GetDataset(count);
 
         private IEnumerable<T> GetItems(int count)
         {
             if (count == 0) yield break;
 
-            yield return (T)GetSearchPositive();
+            yield return GetSearchPositive();
             for (int index = 1; index < count; index++)
             {
-                yield return GetSearchNegativeItem(index);
+                yield return GetSearchNegative(index);
             }
         }
 
-        public object GetSearchPositive() => GetSearchPositiveItem();
+        abstract public T GetSearchPositive();
 
-        abstract public T GetSearchPositiveItem();
+        object IGenerator.GetSearchPositive() => GetSearchPositive();
 
-        abstract protected private T GetSearchNegativeItem(int index);
+        abstract protected private T GetSearchNegative(int index);
     }
 }

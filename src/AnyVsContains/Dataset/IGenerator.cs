@@ -1,11 +1,17 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace AnyVsContains.Dataset
 {
+    public interface IGenerator<T>
+    {
+        IEnumerable<T> GetDataset(int count);
+
+        T GetSearchPositive();
+    }
+
     public interface IGenerator
     {
-        // non-generic interface for dataset generators, exposed mainly for testing
-
         IEnumerable GetDataset(int count);
 
         object GetSearchPositive();
