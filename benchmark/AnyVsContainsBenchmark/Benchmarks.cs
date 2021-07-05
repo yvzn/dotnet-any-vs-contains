@@ -8,19 +8,25 @@ using BenchmarkDotNet.Jobs;
 
 namespace AnyVsContainsBenchmark
 {
+    [SimpleJob(RuntimeMoniker.NetCoreApp31)]
     [SimpleJob(RuntimeMoniker.Net50)]
     [SimpleJob(RuntimeMoniker.Net60)]
     [MemoryDiagnoser]
+    [CsvExporter]
+    [HtmlExporter]
     public class Benchmarks
     {
+        [Params(TypeOfData.Integer, TypeOfData.String, TypeOfData.Record)]
+        public TypeOfData Type;
+
+        [Params(100, 10_000, 1_000_000)]
+        public int N;
+
         [Params(TypeOfCollection.Array, TypeOfCollection.List, TypeOfCollection.HashSet)]
         public TypeOfCollection Coll;
 
         [Params(TypeOfAlgorithm.Any, TypeOfAlgorithm.Contains)]
         public TypeOfAlgorithm Algo;
-
-        [Params(100, 10_000, 1_000_000)]
-        public int N;
 
         private IEnumerable<int> integerDataset;
         private int integerSearchPositive;
@@ -52,21 +58,22 @@ namespace AnyVsContainsBenchmark
         }
 
         [Benchmark]
-        public void Integers()
+        public void AnyVsContains()
         {
-            RunBenchmark(integerDataset, integerSearchPositive);
-        }
+            switch (Type)
+            {
+                case TypeOfData.Integer:
+                    RunBenchmark(integerDataset, integerSearchPositive);
+                    break;
 
-        [Benchmark]
-        public void Strings()
-        {
-            RunBenchmark(stringDataset, stringSearchPositive);
-        }
+                case TypeOfData.String:
+                    RunBenchmark(stringDataset, stringSearchPositive);
+                    break;
 
-        [Benchmark]
-        public void Records()
-        {
-            RunBenchmark(recordDataset, recordSearchPositive);
+                case TypeOfData.Record:
+                    RunBenchmark(recordDataset, recordSearchPositive);
+                    break;
+            }
         }
 
         private void RunBenchmark<T>(IEnumerable<T> dataset, T searchPositive)

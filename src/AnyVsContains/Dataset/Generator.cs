@@ -8,7 +8,7 @@ namespace AnyVsContains.Dataset
     abstract public class Generator<T> : IGenerator<T>, IGenerator
     {
         // random with constant seed, for reproductibility
-        protected readonly Random random = new(Seed: 20210620);
+        protected readonly Random random = new Random(Seed: 20210620);
 
         public IEnumerable<T> GetDataset(int count)
         {

@@ -1,12 +1,13 @@
-﻿using AnyVsContains.Dataset;
+﻿using System;
+using AnyVsContains.Dataset;
 using FluentAssertions;
 using Xunit;
 
 namespace AnyVsContainsTests.Dataset
 {
-    public class TestedAlgorithms : TheoryData<IGenerator>
+    public class TestedGenerators : TheoryData<IGenerator>
     {
-        public TestedAlgorithms()
+        public TestedGenerators()
         {
             Add(new GeneratorOfIntegers());
             Add(new GeneratorOfStrings());
@@ -16,10 +17,10 @@ namespace AnyVsContainsTests.Dataset
 
     public class GeneratorTests
     {
-        public class Method
+        public class GetDataset
         {
             [Theory]
-            [ClassData(typeof(TestedAlgorithms))]
+            [ClassData(typeof(TestedGenerators))]
             public void Should_return_given_number_of_items(IGenerator generator)
             {
                 // Given
@@ -33,11 +34,11 @@ namespace AnyVsContainsTests.Dataset
             }
 
             [Theory]
-            [ClassData(typeof(TestedAlgorithms))]
+            [ClassData(typeof(TestedGenerators))]
             public void Should_contain_one_instance_of_searched_item(IGenerator generator)
             {
                 // Given
-                var count = 100;
+                var count = 20;
                 var searched = generator.GetSearchPositive();
 
                 // When
