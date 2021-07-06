@@ -19,3 +19,11 @@ dotnet_sort_system_directives_first = true
 #Style - modifier options
 
 dotnet_style_require_accessibility_modifiers = never:suggestion
+
+#Markdown
+
+[*.md]
+trim_trailing_whitespace = false
+insert_final_newline = true
+end_of_line = crlf
+charset = utf-8-bom

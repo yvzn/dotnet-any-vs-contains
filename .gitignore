@@ -8,4 +8,4 @@ obj/
 TestStore/
 
 # Benchmark files
-BenchmarkDotNet.Artifacts/
+BenchmarkDotNet.Artifacts/*.log

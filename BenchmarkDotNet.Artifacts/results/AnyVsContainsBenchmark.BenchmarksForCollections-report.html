@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>AnyVsContainsBenchmark.BenchmarksForCollections-20210705-140014</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.0, OS=Windows 10.0.19042.1052 (20H2/October2020Update)
+Intel Core i5-4310U CPU 2.00GHz (Haswell), 1 CPU, 4 logical and 2 physical cores
+.NET SDK=6.0.100-preview.5.21302.13
+  [Host]        : .NET 6.0.0 (6.0.21.30105), X64 RyuJIT
+  .NET 5.0      : .NET 5.0.7 (5.0.721.25508), X64 RyuJIT
+  .NET 6.0      : .NET 6.0.0 (6.0.21.30105), X64 RyuJIT
+  .NET Core 3.1 : .NET Core 3.1.16 (CoreCLR 4.700.21.26205, CoreFX 4.700.21.26205), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>     Method</th><th>    Job</th><th>Runtime</th><th>Type</th><th>N</th><th>Coll</th><th>     Mean</th><th>  Error</th><th> StdDev</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>100</td><td>Array</td><td>12.16 &mu;s</td><td>0.059 &mu;s</td><td>0.050 &mu;s</td><td>1.6479</td><td>-</td><td>-</td><td>3 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>100</td><td>Array</td><td>12.03 &mu;s</td><td>0.092 &mu;s</td><td>0.086 &mu;s</td><td>1.6479</td><td>-</td><td>-</td><td>3 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>100</td><td>Array</td><td>13.48 &mu;s</td><td>0.078 &mu;s</td><td>0.073 &mu;s</td><td>1.6937</td><td>-</td><td>-</td><td>3 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>100</td><td>List</td><td>12.32 &mu;s</td><td>0.080 &mu;s</td><td>0.075 &mu;s</td><td>1.6632</td><td>-</td><td>-</td><td>3 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>100</td><td>List</td><td>12.18 &mu;s</td><td>0.124 &mu;s</td><td>0.110 &mu;s</td><td>1.6632</td><td>-</td><td>-</td><td>3 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>100</td><td>List</td><td>13.40 &mu;s</td><td>0.086 &mu;s</td><td>0.076 &mu;s</td><td>1.7242</td><td>-</td><td>-</td><td>3 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>100</td><td>HashSet</td><td>16.32 &mu;s</td><td>0.069 &mu;s</td><td>0.061 &mu;s</td><td>5.2490</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>100</td><td>HashSet</td><td>16.17 &mu;s</td><td>0.152 &mu;s</td><td>0.142 &mu;s</td><td>5.2185</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>100</td><td>HashSet</td><td>18.61 &mu;s</td><td>0.259 &mu;s</td><td>0.202 &mu;s</td><td>5.2795</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>10000</td><td>Array</td><td>2,126.00 &mu;s</td><td>13.256 &mu;s</td><td>12.400 &mu;s</td><td>113.2813</td><td>23.4375</td><td>-</td><td>246 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>10000</td><td>Array</td><td>2,017.75 &mu;s</td><td>12.977 &mu;s</td><td>12.139 &mu;s</td><td>113.2813</td><td>23.4375</td><td>-</td><td>246 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>10000</td><td>Array</td><td>2,308.78 &mu;s</td><td>15.805 &mu;s</td><td>14.784 &mu;s</td><td>113.2813</td><td>23.4375</td><td>-</td><td>246 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>10000</td><td>List</td><td>2,100.24 &mu;s</td><td>23.401 &mu;s</td><td>19.541 &mu;s</td><td>125.0000</td><td>23.4375</td><td>-</td><td>246 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>10000</td><td>List</td><td>2,034.29 &mu;s</td><td>12.548 &mu;s</td><td>11.737 &mu;s</td><td>125.0000</td><td>23.4375</td><td>-</td><td>246 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>10000</td><td>List</td><td>2,322.62 &mu;s</td><td>16.004 &mu;s</td><td>14.970 &mu;s</td><td>125.0000</td><td>23.4375</td><td>-</td><td>246 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>10000</td><td>HashSet</td><td>2,682.96 &mu;s</td><td>51.167 &mu;s</td><td>56.872 &mu;s</td><td>210.9375</td><td>109.3750</td><td>93.7500</td><td>733 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>10000</td><td>HashSet</td><td>2,553.39 &mu;s</td><td>17.237 &mu;s</td><td>15.280 &mu;s</td><td>207.0313</td><td>105.4688</td><td>93.7500</td><td>733 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>10000</td><td>HashSet</td><td>2,970.67 &mu;s</td><td>24.948 &mu;s</td><td>20.833 &mu;s</td><td>199.2188</td><td>97.6563</td><td>93.7500</td><td>733 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>1000000</td><td>Array</td><td>375,200.24 &mu;s</td><td>5,130.255 &mu;s</td><td>4,547.838 &mu;s</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>19,921 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>1000000</td><td>Array</td><td>367,080.79 &mu;s</td><td>7,271.991 &mu;s</td><td>6,446.431 &mu;s</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>19,920 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>1000000</td><td>Array</td><td>414,670.76 &mu;s</td><td>8,200.910 &mu;s</td><td>8,774.882 &mu;s</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>19,921 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>1000000</td><td>List</td><td>379,458.67 &mu;s</td><td>6,575.673 &mu;s</td><td>6,150.889 &mu;s</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>19,920 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>1000000</td><td>List</td><td>368,506.42 &mu;s</td><td>6,889.042 &mu;s</td><td>6,444.014 &mu;s</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>19,922 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>1000000</td><td>List</td><td>423,740.15 &mu;s</td><td>6,351.732 &mu;s</td><td>5,941.414 &mu;s</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>19,919 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Integer</td><td>1000000</td><td>HashSet</td><td>559,910.12 &mu;s</td><td>8,424.621 &mu;s</td><td>7,880.396 &mu;s</td><td>3000.0000</td><td>3000.0000</td><td>3000.0000</td><td>58,107 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Integer</td><td>1000000</td><td>HashSet</td><td>543,614.51 &mu;s</td><td>7,165.771 &mu;s</td><td>5,983.744 &mu;s</td><td>3000.0000</td><td>3000.0000</td><td>3000.0000</td><td>58,108 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Integer</td><td>1000000</td><td>HashSet</td><td>590,567.90 &mu;s</td><td>9,203.697 &mu;s</td><td>8,158.838 &mu;s</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>58,107 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>100</td><td>Array</td><td>19.20 &mu;s</td><td>0.134 &mu;s</td><td>0.125 &mu;s</td><td>5.0659</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>100</td><td>Array</td><td>18.65 &mu;s</td><td>0.176 &mu;s</td><td>0.164 &mu;s</td><td>5.0659</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>100</td><td>Array</td><td>20.96 &mu;s</td><td>0.158 &mu;s</td><td>0.148 &mu;s</td><td>5.1270</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>100</td><td>List</td><td>19.08 &mu;s</td><td>0.109 &mu;s</td><td>0.102 &mu;s</td><td>5.0964</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>100</td><td>List</td><td>18.85 &mu;s</td><td>0.136 &mu;s</td><td>0.128 &mu;s</td><td>5.0964</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>100</td><td>List</td><td>21.26 &mu;s</td><td>0.086 &mu;s</td><td>0.067 &mu;s</td><td>5.1270</td><td>-</td><td>-</td><td>8 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>100</td><td>HashSet</td><td>24.19 &mu;s</td><td>0.177 &mu;s</td><td>0.165 &mu;s</td><td>9.2773</td><td>-</td><td>-</td><td>14 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>100</td><td>HashSet</td><td>23.94 &mu;s</td><td>0.347 &mu;s</td><td>0.290 &mu;s</td><td>9.2773</td><td>-</td><td>-</td><td>14 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>100</td><td>HashSet</td><td>27.94 &mu;s</td><td>0.228 &mu;s</td><td>0.202 &mu;s</td><td>9.3384</td><td>-</td><td>-</td><td>14 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>10000</td><td>Array</td><td>3,204.95 &mu;s</td><td>23.359 &mu;s</td><td>20.707 &mu;s</td><td>125.0000</td><td>62.5000</td><td>39.0625</td><td>803 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>10000</td><td>Array</td><td>3,296.18 &mu;s</td><td>29.942 &mu;s</td><td>26.543 &mu;s</td><td>140.6250</td><td>97.6563</td><td>39.0625</td><td>803 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>10000</td><td>Array</td><td>3,805.00 &mu;s</td><td>32.498 &mu;s</td><td>30.398 &mu;s</td><td>125.0000</td><td>62.5000</td><td>39.0625</td><td>803 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>10000</td><td>List</td><td>3,203.95 &mu;s</td><td>21.562 &mu;s</td><td>20.169 &mu;s</td><td>125.0000</td><td>78.1250</td><td>39.0625</td><td>803 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>10000</td><td>List</td><td>3,346.52 &mu;s</td><td>36.160 &mu;s</td><td>33.825 &mu;s</td><td>144.5313</td><td>97.6563</td><td>39.0625</td><td>803 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>10000</td><td>List</td><td>3,798.77 &mu;s</td><td>39.184 &mu;s</td><td>36.653 &mu;s</td><td>125.0000</td><td>62.5000</td><td>39.0625</td><td>803 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>10000</td><td>HashSet</td><td>3,777.14 &mu;s</td><td>38.616 &mu;s</td><td>42.922 &mu;s</td><td>167.9688</td><td>164.0625</td><td>164.0625</td><td>1,383 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>10000</td><td>HashSet</td><td>3,708.26 &mu;s</td><td>22.015 &mu;s</td><td>20.593 &mu;s</td><td>167.9688</td><td>164.0625</td><td>164.0625</td><td>1,383 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>10000</td><td>HashSet</td><td>4,328.44 &mu;s</td><td>31.931 &mu;s</td><td>29.868 &mu;s</td><td>171.8750</td><td>164.0625</td><td>164.0625</td><td>1,383 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>1000000</td><td>Array</td><td>552,734.17 &mu;s</td><td>10,351.471 &mu;s</td><td>11,075.958 &mu;s</td><td>9000.0000</td><td>4000.0000</td><td>3000.0000</td><td>71,078 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>1000000</td><td>Array</td><td>543,646.01 &mu;s</td><td>8,161.240 &mu;s</td><td>7,634.028 &mu;s</td><td>9000.0000</td><td>4000.0000</td><td>3000.0000</td><td>71,069 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>1000000</td><td>Array</td><td>617,503.34 &mu;s</td><td>12,155.244 &mu;s</td><td>11,370.023 &mu;s</td><td>9000.0000</td><td>4000.0000</td><td>3000.0000</td><td>71,068 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>1000000</td><td>List</td><td>559,831.88 &mu;s</td><td>7,388.020 &mu;s</td><td>6,910.758 &mu;s</td><td>9000.0000</td><td>4000.0000</td><td>3000.0000</td><td>71,070 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>1000000</td><td>List</td><td>557,816.14 &mu;s</td><td>8,909.390 &mu;s</td><td>8,333.849 &mu;s</td><td>9000.0000</td><td>4000.0000</td><td>3000.0000</td><td>71,071 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>1000000</td><td>List</td><td>639,455.55 &mu;s</td><td>11,666.915 &mu;s</td><td>9,742.402 &mu;s</td><td>9000.0000</td><td>4000.0000</td><td>3000.0000</td><td>71,068 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>String</td><td>1000000</td><td>HashSet</td><td>866,222.81 &mu;s</td><td>12,633.484 &mu;s</td><td>11,817.369 &mu;s</td><td>10000.0000</td><td>5000.0000</td><td>4000.0000</td><td>115,883 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>String</td><td>1000000</td><td>HashSet</td><td>866,852.42 &mu;s</td><td>7,703.610 &mu;s</td><td>6,432.863 &mu;s</td><td>10000.0000</td><td>5000.0000</td><td>4000.0000</td><td>115,884 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>String</td><td>1000000</td><td>HashSet</td><td>930,124.91 &mu;s</td><td>16,189.690 &mu;s</td><td>15,143.846 &mu;s</td><td>10000.0000</td><td>5000.0000</td><td>4000.0000</td><td>115,884 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>100</td><td>Array</td><td>34.68 &mu;s</td><td>0.196 &mu;s</td><td>0.174 &mu;s</td><td>13.1836</td><td>-</td><td>-</td><td>20 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>100</td><td>Array</td><td>34.66 &mu;s</td><td>0.173 &mu;s</td><td>0.162 &mu;s</td><td>13.1836</td><td>-</td><td>-</td><td>20 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>100</td><td>Array</td><td>38.97 &mu;s</td><td>0.326 &mu;s</td><td>0.305 &mu;s</td><td>13.2446</td><td>-</td><td>-</td><td>20 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>100</td><td>List</td><td>34.41 &mu;s</td><td>0.211 &mu;s</td><td>0.198 &mu;s</td><td>13.1836</td><td>-</td><td>-</td><td>20 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>100</td><td>List</td><td>34.58 &mu;s</td><td>0.229 &mu;s</td><td>0.214 &mu;s</td><td>13.1836</td><td>-</td><td>-</td><td>20 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>100</td><td>List</td><td>39.30 &mu;s</td><td>0.203 &mu;s</td><td>0.180 &mu;s</td><td>13.2446</td><td>-</td><td>-</td><td>20 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>100</td><td>HashSet</td><td>45.44 &mu;s</td><td>0.306 &mu;s</td><td>0.286 &mu;s</td><td>17.3950</td><td>-</td><td>-</td><td>27 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>100</td><td>HashSet</td><td>45.05 &mu;s</td><td>0.197 &mu;s</td><td>0.154 &mu;s</td><td>17.3340</td><td>-</td><td>-</td><td>27 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>100</td><td>HashSet</td><td>50.46 &mu;s</td><td>0.295 &mu;s</td><td>0.276 &mu;s</td><td>17.4561</td><td>-</td><td>-</td><td>27 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>10000</td><td>Array</td><td>6,081.33 &mu;s</td><td>22.654 &mu;s</td><td>20.082 &mu;s</td><td>351.5625</td><td>179.6875</td><td>70.3125</td><td>2,053 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>10000</td><td>Array</td><td>6,165.73 &mu;s</td><td>69.282 &mu;s</td><td>64.806 &mu;s</td><td>359.3750</td><td>171.8750</td><td>70.3125</td><td>2,053 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>10000</td><td>Array</td><td>7,549.14 &mu;s</td><td>140.810 &mu;s</td><td>150.665 &mu;s</td><td>343.7500</td><td>156.2500</td><td>62.5000</td><td>2,053 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>10000</td><td>List</td><td>6,320.12 &mu;s</td><td>118.481 &mu;s</td><td>105.031 &mu;s</td><td>359.3750</td><td>171.8750</td><td>70.3125</td><td>2,053 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>10000</td><td>List</td><td>6,295.94 &mu;s</td><td>68.398 &mu;s</td><td>53.401 &mu;s</td><td>359.3750</td><td>171.8750</td><td>70.3125</td><td>2,053 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>10000</td><td>List</td><td>7,887.32 &mu;s</td><td>147.174 &mu;s</td><td>300.638 &mu;s</td><td>351.5625</td><td>179.6875</td><td>70.3125</td><td>2,053 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>10000</td><td>HashSet</td><td>7,650.47 &mu;s</td><td>58.296 &mu;s</td><td>54.530 &mu;s</td><td>375.0000</td><td>210.9375</td><td>164.0625</td><td>2,632 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>10000</td><td>HashSet</td><td>7,846.07 &mu;s</td><td>65.373 &mu;s</td><td>54.589 &mu;s</td><td>375.0000</td><td>210.9375</td><td>164.0625</td><td>2,632 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>10000</td><td>HashSet</td><td>8,987.77 &mu;s</td><td>166.996 &mu;s</td><td>148.037 &mu;s</td><td>375.0000</td><td>203.1250</td><td>156.2500</td><td>2,633 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>1000000</td><td>Array</td><td>947,750.14 &mu;s</td><td>8,669.742 &mu;s</td><td>8,109.682 &mu;s</td><td>29000.0000</td><td>11000.0000</td><td>3000.0000</td><td>196,060 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>1000000</td><td>Array</td><td>951,599.79 &mu;s</td><td>12,449.718 &mu;s</td><td>11,645.474 &mu;s</td><td>29000.0000</td><td>11000.0000</td><td>3000.0000</td><td>196,061 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>1000000</td><td>Array</td><td>1,048,091.82 &mu;s</td><td>16,334.407 &mu;s</td><td>14,480.027 &mu;s</td><td>29000.0000</td><td>11000.0000</td><td>3000.0000</td><td>196,061 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>1000000</td><td>List</td><td>951,128.75 &mu;s</td><td>10,831.186 &mu;s</td><td>10,131.498 &mu;s</td><td>29000.0000</td><td>11000.0000</td><td>3000.0000</td><td>196,061 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>1000000</td><td>List</td><td>947,586.95 &mu;s</td><td>16,204.912 &mu;s</td><td>15,158.084 &mu;s</td><td>29000.0000</td><td>11000.0000</td><td>3000.0000</td><td>196,063 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>1000000</td><td>List</td><td>1,057,088.15 &mu;s</td><td>11,240.182 &mu;s</td><td>10,514.073 &mu;s</td><td>29000.0000</td><td>11000.0000</td><td>3000.0000</td><td>196,069 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 5.0</td><td>.NET 5.0</td><td>Record</td><td>1000000</td><td>HashSet</td><td>1,523,554.59 &mu;s</td><td>13,525.763 &mu;s</td><td>12,652.008 &mu;s</td><td>30000.0000</td><td>12000.0000</td><td>4000.0000</td><td>240,874 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET 6.0</td><td>.NET 6.0</td><td>Record</td><td>1000000</td><td>HashSet</td><td>1,505,358.71 &mu;s</td><td>14,851.031 &mu;s</td><td>13,891.663 &mu;s</td><td>30000.0000</td><td>12000.0000</td><td>4000.0000</td><td>240,874 KB</td>
+</tr><tr><td>CreateCollections</td><td>.NET Core 3.1</td><td>.NET Core 3.1</td><td>Record</td><td>1000000</td><td>HashSet</td><td>1,651,014.19 &mu;s</td><td>22,922.908 &mu;s</td><td>21,442.102 &mu;s</td><td>30000.0000</td><td>12000.0000</td><td>4000.0000</td><td>240,875 KB</td>
+</tr></tbody></table>
+</body>
+</html>
