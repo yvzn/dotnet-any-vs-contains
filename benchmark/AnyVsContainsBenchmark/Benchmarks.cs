@@ -11,7 +11,6 @@ namespace AnyVsContainsBenchmark
     [SimpleJob(RuntimeMoniker.NetCoreApp31)]
     [SimpleJob(RuntimeMoniker.Net50)]
     [SimpleJob(RuntimeMoniker.Net60)]
-    [MemoryDiagnoser]
     [CsvExporter]
     [HtmlExporter]
     public class Benchmarks
@@ -28,13 +27,13 @@ namespace AnyVsContainsBenchmark
         [Params(TypeOfAlgorithm.Any, TypeOfAlgorithm.Contains)]
         public TypeOfAlgorithm Algo;
 
-        private IEnumerable<int> integerDataset;
+        private ICollection<int> integerCollection;
         private int integerSearchPositive;
 
-        private IEnumerable<string> stringDataset;
+        private ICollection<string> stringCollection;
         private string stringSearchPositive;
 
-        private IEnumerable<Contract> recordDataset;
+        private ICollection<Contract> recordCollection;
         private Contract recordSearchPositive;
 
         private ISearchAlgorithm searchAlgorithm;
@@ -42,17 +41,26 @@ namespace AnyVsContainsBenchmark
         [GlobalSetup]
         public void Setup()
         {
-            var generatorOfIntegers = new GeneratorOfIntegers();
-            integerDataset = generatorOfIntegers.GetDataset(N);
-            integerSearchPositive = generatorOfIntegers.GetSearchPositive();
+            switch (Type)
+            {
+                case TypeOfData.Integer:
+                    var generatorOfIntegers = new GeneratorOfIntegers();
+                    integerCollection = CollectionsFactory.Create(Coll, generatorOfIntegers.GetDataset(N));
+                    integerSearchPositive = generatorOfIntegers.GetSearchPositive();
+                    break;
 
-            var generatorOfStrings = new GeneratorOfStrings();
-            stringDataset = generatorOfStrings.GetDataset(N);
-            stringSearchPositive = generatorOfStrings.GetSearchPositive();
+                case TypeOfData.String:
+                    var generatorOfStrings = new GeneratorOfStrings();
+                    stringCollection = CollectionsFactory.Create(Coll, generatorOfStrings.GetDataset(N));
+                    stringSearchPositive = generatorOfStrings.GetSearchPositive();
+                    break;
 
-            var generatorOfRecords = new GeneratorOfRecords();
-            recordDataset = generatorOfRecords.GetDataset(N);
-            recordSearchPositive = generatorOfRecords.GetSearchPositive();
+                case TypeOfData.Record:
+                    var generatorOfRecords = new GeneratorOfRecords();
+                    recordCollection = CollectionsFactory.Create(Coll, generatorOfRecords.GetDataset(N));
+                    recordSearchPositive = generatorOfRecords.GetSearchPositive();
+                    break;
+            }
 
             searchAlgorithm = SearchAlgorithmFactory.Create(Algo);
         }
@@ -63,22 +71,21 @@ namespace AnyVsContainsBenchmark
             switch (Type)
             {
                 case TypeOfData.Integer:
-                    RunBenchmark(integerDataset, integerSearchPositive);
+                    RunBenchmark(integerCollection, integerSearchPositive);
                     break;
 
                 case TypeOfData.String:
-                    RunBenchmark(stringDataset, stringSearchPositive);
+                    RunBenchmark(stringCollection, stringSearchPositive);
                     break;
 
                 case TypeOfData.Record:
-                    RunBenchmark(recordDataset, recordSearchPositive);
+                    RunBenchmark(recordCollection, recordSearchPositive);
                     break;
             }
         }
 
-        private void RunBenchmark<T>(IEnumerable<T> dataset, T searchPositive)
+        private void RunBenchmark<T>(ICollection<T> sourceCollection, T searchPositive)
         {
-            var sourceCollection = CollectionsFactory.Create(Coll, dataset);
             var found = searchAlgorithm.Search(sourceCollection, searchPositive);
             Debug.Assert(found);
         }
