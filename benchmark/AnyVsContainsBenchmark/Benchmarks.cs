@@ -27,14 +27,9 @@ namespace AnyVsContainsBenchmark
         [Params(TypeOfAlgorithm.Any, TypeOfAlgorithm.Contains)]
         public TypeOfAlgorithm Algo;
 
-        private ICollection<int> integerCollection;
-        private int integerSearchPositive;
-
-        private ICollection<string> stringCollection;
-        private string stringSearchPositive;
-
-        private ICollection<Contract> recordCollection;
-        private Contract recordSearchPositive;
+        private readonly Benchmark<int, GeneratorOfIntegers> benchmarkOfIntegers = new Benchmark<int, GeneratorOfIntegers>();
+        private readonly Benchmark<string, GeneratorOfStrings> benchmarkOfStrings = new Benchmark<string, GeneratorOfStrings>();
+        private readonly Benchmark<Contract, GeneratorOfRecords> benchmarkOfRecords = new Benchmark<Contract, GeneratorOfRecords>();
 
         private ISearchAlgorithm searchAlgorithm;
 
@@ -44,21 +39,15 @@ namespace AnyVsContainsBenchmark
             switch (Type)
             {
                 case TypeOfData.Integer:
-                    var generatorOfIntegers = new GeneratorOfIntegers();
-                    integerCollection = CollectionsFactory.Create(Coll, generatorOfIntegers.GetDataset(N));
-                    integerSearchPositive = generatorOfIntegers.GetSearchPositive();
+                    benchmarkOfIntegers.Setup(Coll, N);
                     break;
 
                 case TypeOfData.String:
-                    var generatorOfStrings = new GeneratorOfStrings();
-                    stringCollection = CollectionsFactory.Create(Coll, generatorOfStrings.GetDataset(N));
-                    stringSearchPositive = generatorOfStrings.GetSearchPositive();
+                    benchmarkOfStrings.Setup(Coll, N);
                     break;
 
                 case TypeOfData.Record:
-                    var generatorOfRecords = new GeneratorOfRecords();
-                    recordCollection = CollectionsFactory.Create(Coll, generatorOfRecords.GetDataset(N));
-                    recordSearchPositive = generatorOfRecords.GetSearchPositive();
+                    benchmarkOfRecords.Setup(Coll, N);
                     break;
             }
 
@@ -71,23 +60,37 @@ namespace AnyVsContainsBenchmark
             switch (Type)
             {
                 case TypeOfData.Integer:
-                    RunBenchmark(integerCollection, integerSearchPositive);
+                    benchmarkOfIntegers.RunBenchmark(searchAlgorithm);
                     break;
 
                 case TypeOfData.String:
-                    RunBenchmark(stringCollection, stringSearchPositive);
+                    benchmarkOfStrings.RunBenchmark(searchAlgorithm);
                     break;
 
                 case TypeOfData.Record:
-                    RunBenchmark(recordCollection, recordSearchPositive);
+                    benchmarkOfRecords.RunBenchmark(searchAlgorithm);
                     break;
             }
         }
 
-        private void RunBenchmark<T>(ICollection<T> sourceCollection, T searchPositive)
+        private class Benchmark<TValue, TGenerator> where TGenerator : IGenerator<TValue>, new()
         {
-            var found = searchAlgorithm.Search(sourceCollection, searchPositive);
-            Debug.Assert(found);
+            private TGenerator datasetGenerator;
+            private ICollection<TValue> collection;
+            private TValue searchPositive;
+
+            public void Setup(TypeOfCollection typeOfCollection, int numberOfValues)
+            {
+                datasetGenerator = new TGenerator();
+                collection = CollectionsFactory.Create(typeOfCollection, datasetGenerator.GetDataset(numberOfValues));
+                searchPositive = datasetGenerator.GetSearchPositive();
+            }
+
+            public void RunBenchmark(ISearchAlgorithm searchAlgorithm)
+            {
+                var found = searchAlgorithm.Search(collection, searchPositive);
+                Debug.Assert(found);
+            }
         }
     }
 }

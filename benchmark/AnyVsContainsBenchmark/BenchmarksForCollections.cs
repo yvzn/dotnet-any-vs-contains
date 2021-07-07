@@ -24,9 +24,9 @@ namespace AnyVsContainsBenchmark
         [Params(TypeOfCollection.Array, TypeOfCollection.List, TypeOfCollection.HashSet)]
         public TypeOfCollection Coll;
 
-        private IEnumerable<int> integerDataset;
-        private IEnumerable<string> stringDataset;
-        private IEnumerable<Contract> recordDataset;
+        private readonly Benchmark<int, GeneratorOfIntegers> benchmarkOfIntegers = new Benchmark<int, GeneratorOfIntegers>();
+        private readonly Benchmark<string, GeneratorOfStrings> benchmarkOfStrings = new Benchmark<string, GeneratorOfStrings>();
+        private readonly Benchmark<Contract, GeneratorOfRecords> benchmarkOfRecords = new Benchmark<Contract, GeneratorOfRecords>();
 
         [GlobalSetup]
         public void Setup()
@@ -34,18 +34,15 @@ namespace AnyVsContainsBenchmark
             switch (Type)
             {
                 case TypeOfData.Integer:
-                    var generatorOfIntegers = new GeneratorOfIntegers();
-                    integerDataset = generatorOfIntegers.GetDataset(N);
+                    benchmarkOfIntegers.Setup(Coll, N);
                     break;
 
                 case TypeOfData.String:
-                    var generatorOfStrings = new GeneratorOfStrings();
-                    stringDataset = generatorOfStrings.GetDataset(N);
+                    benchmarkOfStrings.Setup(Coll, N);
                     break;
 
                 case TypeOfData.Record:
-                    var generatorOfRecords = new GeneratorOfRecords();
-                    recordDataset = generatorOfRecords.GetDataset(N);
+                    benchmarkOfRecords.Setup(Coll, N);
                     break;
             }
         }
@@ -56,23 +53,37 @@ namespace AnyVsContainsBenchmark
             switch (Type)
             {
                 case TypeOfData.Integer:
-                    RunBenchmark(Coll, integerDataset);
+                    benchmarkOfIntegers.RunBenchmark();
                     break;
 
                 case TypeOfData.String:
-                    RunBenchmark(Coll, stringDataset);
+                    benchmarkOfStrings.RunBenchmark();
                     break;
 
                 case TypeOfData.Record:
-                    RunBenchmark(Coll, recordDataset);
+                    benchmarkOfRecords.RunBenchmark();
                     break;
             }
         }
 
-        private void RunBenchmark<T>(TypeOfCollection type, IEnumerable<T> dataset)
+        private class Benchmark<TValue, TGenerator> where TGenerator : IGenerator<TValue>, new()
         {
-            var collection = CollectionsFactory.Create(type, dataset);
-            Debug.Assert(collection.Count > 0);
+            private IEnumerable<TValue> dataset;
+            private TypeOfCollection typeOfCollection;
+
+            public void Setup(TypeOfCollection typeOfCollection, int numberOfValues)
+            {
+                this.typeOfCollection = typeOfCollection;
+                var datasetGenerator = new TGenerator();
+                dataset = datasetGenerator.GetDataset(numberOfValues);
+            }
+
+            public ICollection<TValue> RunBenchmark()
+            {
+                var collection = CollectionsFactory.Create(typeOfCollection, dataset);
+                Debug.Assert(collection.Count > 0);
+                return collection;
+            }
         }
     }
 }

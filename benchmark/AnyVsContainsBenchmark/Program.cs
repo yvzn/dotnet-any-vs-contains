@@ -7,7 +7,7 @@ namespace AnyVsContainsBenchmark
         static void Main(string[] args)
         {
             BenchmarkRunner.Run<Benchmarks>();
-            BenchmarkRunner.Run<BenchmarkForLists>();
+            BenchmarkRunner.Run<BenchmarksForLists>();
             BenchmarkRunner.Run<BenchmarksForCollections>();
         }
     }
